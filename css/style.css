@@ -46,15 +46,17 @@ body {
 }
 
 .logo {
-    width: 120px;
+    width: 200px; /* Increased from 120px to 200px */
+    max-width: 80%; /* Ensures responsiveness on small screens */
     height: auto;
-    margin-bottom: 5px;
+    margin-bottom: 15px; /* Increased spacing below logo */
     filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
     transition: all 0.3s ease;
 }
 
 .box:hover .logo {
     filter: drop-shadow(0 0 10px rgba(153, 185, 255, 0.6));
+    transform: scale(1.05); /* Subtle zoom effect on hover */
 }
 
 .box-title h1 {
@@ -205,6 +207,10 @@ button:disabled {
     
     .box-title h1 {
         font-size: 1.5em;
+    }
+    
+    .logo {
+        width: 150px; /* Slightly smaller on mobile but still prominent */
     }
     
     input {
