@@ -11,6 +11,8 @@ try {
 } catch (error) {
     console.error('Error initializing Supabase:', error);
 }
+// In the login success handler, change:
+window.location.href = '/dashboard.html';
 
 // DOM Elements (with existence check)
 function getElement(id) {
