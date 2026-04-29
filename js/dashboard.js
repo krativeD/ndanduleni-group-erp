@@ -17,7 +17,6 @@ async function loadUserData() {
     
     const user = session.user;
     
-    // Update user info in sidebar
     const userName = document.getElementById('userName');
     const userAvatar = document.getElementById('userAvatar');
     const userRole = document.getElementById('userRole');
@@ -30,7 +29,6 @@ async function loadUserData() {
         userAvatar.textContent = (user.user_metadata?.full_name || user.email)[0].toUpperCase();
     }
     
-    // Fetch profile from database
     try {
         const { data: profile } = await supabaseClient
             .from('profiles')
@@ -42,7 +40,7 @@ async function loadUserData() {
             userRole.textContent = profile.role || 'Employee';
         }
     } catch (error) {
-        console.log('Profile fetch error (expected if table not created):', error.message);
+        console.log('Profile fetch error:', error.message);
         if (userRole) {
             userRole.textContent = 'User';
         }
@@ -65,7 +63,6 @@ function initializeNavigation() {
     const pages = document.querySelectorAll('.page');
     const moduleCards = document.querySelectorAll('.module-card');
     
-    // Sidebar navigation
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             const pageName = item.dataset.page;
@@ -73,10 +70,8 @@ function initializeNavigation() {
         });
     });
     
-    // Module card clicks
     moduleCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            // Don't trigger if button was clicked
             if (e.target.classList.contains('module-btn')) {
                 return;
             }
@@ -85,7 +80,6 @@ function initializeNavigation() {
             navigateToPage(pageName, targetNav, navItems, pages);
         });
         
-        // Module button clicks
         const btn = card.querySelector('.module-btn');
         if (btn) {
             btn.addEventListener('click', (e) => {
@@ -99,23 +93,19 @@ function initializeNavigation() {
 }
 
 function navigateToPage(pageName, navItem, allNavItems, allPages) {
-    // Update active nav item
     allNavItems.forEach(nav => nav.classList.remove('active'));
     if (navItem) {
         navItem.classList.add('active');
     }
     
-    // Show corresponding page
     allPages.forEach(page => page.classList.remove('active'));
     const targetPage = document.getElementById(`${pageName}-page`);
     if (targetPage) {
         targetPage.classList.add('active');
     }
     
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
-    // Close sidebar on mobile
     if (window.innerWidth <= 1024) {
         toggleSidebar(false);
     }
@@ -159,7 +149,7 @@ function loadTheme() {
 
 // Button animations
 function initializeButtonAnimations() {
-    const buttons = document.querySelectorAll('.module-btn, .view-all-btn');
+    const buttons = document.querySelectorAll('.module-btn');
     
     buttons.forEach(btn => {
         btn.addEventListener('mousedown', function() {
@@ -185,7 +175,6 @@ function initializeSearch() {
         const query = searchInput.value.trim().toLowerCase();
         if (!query) return;
         
-        // Search through module cards
         const moduleCards = document.querySelectorAll('.module-card');
         let found = false;
         
@@ -206,7 +195,6 @@ function initializeSearch() {
         });
         
         if (found) {
-            // Navigate to overview if not already there
             const overviewNav = document.querySelector('.nav-item[data-page="overview"]');
             const allNavItems = document.querySelectorAll('.nav-item');
             const allPages = document.querySelectorAll('.page');
@@ -235,20 +223,7 @@ function initializeNotifications() {
     
     if (notificationBtn) {
         notificationBtn.addEventListener('click', () => {
-            // Here you would typically show a notification panel
-            // For now, we'll show a simple alert
             alert('Notifications feature coming soon!\n\nYou have 5 unread notifications');
-        });
-    }
-}
-
-// View All Activities
-function initializeViewAll() {
-    const viewAllBtn = document.querySelector('.view-all-btn');
-    
-    if (viewAllBtn) {
-        viewAllBtn.addEventListener('click', () => {
-            alert('Full activity log coming soon!');
         });
     }
 }
@@ -266,27 +241,17 @@ async function handleLogout() {
 
 // Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', async () => {
-    // Check authentication first
     const session = await checkAuth();
     if (!session) return;
     
-    // Load user data
     await loadUserData();
-    
-    // Load theme
     loadTheme();
-    
-    // Update date
     updateDate();
-    
-    // Initialize all systems
     initializeNavigation();
     initializeButtonAnimations();
     initializeSearch();
     initializeNotifications();
-    initializeViewAll();
     
-    // Close sidebar on outside click (mobile)
     document.addEventListener('click', (e) => {
         const sidebar = document.getElementById('sidebar');
         const menuToggle = document.querySelector('.menu-toggle');
@@ -299,7 +264,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
     
-    // Handle window resize
     window.addEventListener('resize', () => {
         if (window.innerWidth > 1024) {
             const sidebar = document.getElementById('sidebar');
