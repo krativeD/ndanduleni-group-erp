@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ndanduleni Group - ERP Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="box-title">
+                <img src="images/logo.png" alt="Ndanduleni Group Logo" class="logo">
+                <h1>Ndanduleni Group</h1>
+                <p>enterprise resource planning</p>
+            </div>
+            
+            <form id="loginForm" class="form-box">
+                <div class="input-group">
+                    <input 
+                        type="email" 
+                        id="email"
+                        class="email" 
+                        placeholder="Please enter your e-mail"
+                        required
+                    />
+                </div>
+                <div class="input-group">
+                    <input 
+                        type="password" 
+                        id="password"
+                        class="pass" 
+                        placeholder="Password"
+                        required
+                    />
+                </div>
+                
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+                
+                <div class="form-button">
+                    <button type="submit" id="loginButton">Log in</button>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+                </div>
+            </form>
+            
+            <!-- Forgot Password Form (Hidden by default) -->
+            <form id="forgotPasswordForm" class="form-box" style="display: none;">
+                <div class="input-group">
+                    <input 
+                        type="email" 
+                        id="resetEmail"
+                        class="email" 
+                        placeholder="Enter your e-mail"
+                        required
+                    />
+                </div>
+                
+                <div id="resetMessage" class="success-message" style="display: none;"></div>
+                <div id="resetError" class="error-message" style="display: none;"></div>
+                
+                <div class="form-button">
+                    <button type="submit">Reset Password</button>
+                </div>
+                
+                <div class="forgot-password">
+                    <a href="#" onclick="showLoginForm()">Back to Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="js/auth.js"></script>
+</body>
+</html>
