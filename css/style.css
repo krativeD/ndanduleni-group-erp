@@ -1,0 +1,219 @@
+* {
+    font-family: "Roboto Mono", monospace;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #333;
+    font-family: "Quicksand", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+}
+
+.box {
+    color: #babecc;
+    width: 100%;
+    padding: 35px;
+    border-radius: 2em;
+    box-shadow: 5px 5px 20px #575259, -5px -5px 20px #111011;
+    background-color: #333;
+    transition: all 0.3s ease;
+}
+
+.box:hover {
+    color: #fff;
+    text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 2px #fff, 0 0 5px #99b9ff,
+        0 0 10px #99b9ff, 0 0 20px #99b9ff, 0 0 30px #99b9ff, 0 0 50px #99b9ff;
+    box-shadow: -5px -5px 20px #111011, 5px 5px 10px #b2caff, 6px 6px 30px #99b9ff,
+        -5px -5px 25px #111011;
+}
+
+.box-title {
+    text-align: center;
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+.logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 5px;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+    transition: all 0.3s ease;
+}
+
+.box:hover .logo {
+    filter: drop-shadow(0 0 10px rgba(153, 185, 255, 0.6));
+}
+
+.box-title h1 {
+    margin: 10px 0 0 0;
+    font-size: 1.8em;
+}
+
+.box-title p {
+    font-size: 15px;
+    margin: 5px 0 20px 0;
+    opacity: 0.8;
+}
+
+.form-box {
+    padding: 10px 5px 5px 5px;
+}
+
+.input-group {
+    margin: 20px 0;
+}
+
+input {
+    color: #babecc;
+    font-size: 16px;
+    padding: 15px 20px;
+    width: 100%;
+}
+
+input::placeholder {
+    color: #babecc;
+}
+
+input:hover::placeholder {
+    color: #fff;
+}
+
+input:hover {
+    color: #fff;
+    text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 2px #99b9ff, 0 0 5px #99b9ff,
+        0 0 5px #99b9ff;
+}
+
+.email,
+.pass {
+    background-color: rgb(255, 255, 255, 0.05);
+    margin: 0;
+    border-radius: 25px;
+    box-shadow: inset 2px 2px 5px #111011, inset -5px -5px 10px #575259;
+}
+
+button {
+    background-color: #333;
+    font-size: 18px;
+    color: #babecc;
+    width: 100%;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 25px;
+    box-shadow: 5px 5px 20px #575259, -5px -5px 20px #111011;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    color: #fff;
+    text-shadow: 0 0 2px #fff, 0 0 2px #fff, 0 0 2px #fff, 0 0 5px #99b9ff,
+        0 0 10px #99b9ff, 0 0 20px #99b9ff, 0 0 30px #99b9ff, 0 0 50px #99b9ff;
+    box-shadow: -5px -5px 25px #111011, 3px 3px 10px #b2caff, 4px 4px 20px #99b9ff,
+        -5px -5px 25px #111011;
+}
+
+button:active {
+    color: #7fa8ff;
+    text-shadow: 0 0 2px #99b9ff, 0 0 2px #99b9ff, 0 0 2px #99b9ff,
+        0 0 5px #99b9ff, 0 0 10px #99b9ff, 0 0 20px #99b9ff, 0 0 30px #99b9ff,
+        0 0 50px #99b9ff;
+    box-shadow: inset 2px 2px 5px #111011, inset -5px -5px 10px #575259;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.error-message {
+    background-color: rgba(255, 87, 87, 0.1);
+    border: 1px solid rgba(255, 87, 87, 0.3);
+    color: #ff5757;
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.success-message {
+    background-color: rgba(87, 255, 87, 0.1);
+    border: 1px solid rgba(87, 255, 87, 0.3);
+    color: #57ff57;
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 14px;
+}
+
+.forgot-password {
+    text-align: center;
+    padding: 10px 0 0 0;
+}
+
+.forgot-password a {
+    color: #babecc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.forgot-password a:hover {
+    color: #99b9ff;
+    text-shadow: 0 0 10px #99b9ff;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #babecc;
+    border-radius: 50%;
+    border-top-color: #99b9ff;
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+    .box {
+        padding: 25px;
+    }
+    
+    .box-title {
+        font-size: 20px;
+    }
+    
+    .box-title h1 {
+        font-size: 1.5em;
+    }
+    
+    input {
+        font-size: 14px;
+        padding: 12px 15px;
+    }
+    
+    button {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
