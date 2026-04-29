@@ -1,510 +1,503 @@
-/* Add to your existing CSS variables */
-:root {
-    /* ... existing variables ... */
-    --blue: #0895FF;
-    --blue-light: rgba(8, 149, 255, 0.1);
-    --purple: #7C3AED;
-    --purple-light: rgba(124, 58, 237, 0.1);
-    --green: #10B981;
-    --green-light: rgba(16, 185, 129, 0.1);
-    --orange: #F59E0B;
-    --orange-light: rgba(245, 158, 11, 0.1);
-    --cyan: #06B6D4;
-    --cyan-light: rgba(6, 182, 212, 0.1);
-    --red: #EF4444;
-    --red-light: rgba(239, 68, 68, 0.1);
-}
-
-/* Welcome Section */
-.welcome-section {
-    margin-bottom: 30px;
-}
-
-.page-subtitle {
-    color: var(--text-secondary);
-    font-size: 16px;
-    margin-top: 5px;
-    font-weight: 400;
-}
-
-/* Quick Stats Grid */
-.quick-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.quick-stat {
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.quick-stat:hover {
-    transform: translateY(-5px);
-}
-
-.quick-stat-icon {
-    width: 55px;
-    height: 55px;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    box-shadow: inset 3px 3px 6px var(--shadow-dark),
-                inset -3px -3px 6px var(--shadow-light);
-}
-
-.quick-stat-icon.blue { background: var(--blue-light); }
-.quick-stat-icon.purple { background: var(--purple-light); }
-.quick-stat-icon.green { background: var(--green-light); }
-.quick-stat-icon.orange { background: var(--orange-light); }
-
-.quick-stat-info {
-    flex: 1;
-}
-
-.quick-stat-info h4 {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
-.quick-stat-value {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 3px;
-}
-
-.trend {
-    font-size: 12px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 10px;
-}
-
-.trend.positive {
-    color: #10B981;
-    background: rgba(16, 185, 129, 0.1);
-}
-
-.trend.negative {
-    color: #EF4444;
-    background: rgba(239, 68, 68, 0.1);
-}
-
-/* Module Cards Grid */
-.module-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    margin-bottom: 30px;
-}
-
-.module-card {
-    padding: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.module-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 12px 12px 24px var(--shadow-dark),
-                -12px -12px 24px var(--shadow-light);
-}
-
-.module-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--blue), var(--purple));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.module-card:hover::before {
-    opacity: 1;
-}
-
-.module-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.module-icon-wrapper {
-    width: 50px;
-    height: 50px;
-    border-radius: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 3px 3px 6px var(--shadow-dark),
-                -3px -3px 6px var(--shadow-light);
-}
-
-.module-icon-wrapper.blue { background: var(--blue-light); }
-.module-icon-wrapper.purple { background: var(--purple-light); }
-.module-icon-wrapper.green { background: var(--green-light); }
-.module-icon-wrapper.orange { background: var(--orange-light); }
-.module-icon-wrapper.cyan { background: var(--cyan-light); }
-.module-icon-wrapper.red { background: var(--red-light); }
-
-.module-icon {
-    font-size: 24px;
-}
-
-.module-status {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.module-status.active {
-    color: #10B981;
-    background: rgba(16, 185, 129, 0.1);
-}
-
-.module-status.warning {
-    color: #F59E0B;
-    background: rgba(245, 158, 11, 0.1);
-}
-
-.module-title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: var(--text-primary);
-}
-
-.module-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.metric {
-    text-align: center;
-}
-
-.metric-label {
-    display: block;
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-bottom: 5px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.metric-value {
-    display: block;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-primary);
-}
-
-.module-progress {
-    margin-bottom: 20px;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 8px;
-    background: var(--bg-primary);
-    border-radius: 10px;
-    box-shadow: inset 2px 2px 4px var(--shadow-dark),
-                inset -2px -2px 4px var(--shadow-light);
-    overflow: hidden;
-    margin-bottom: 8px;
-}
-
-.progress-fill {
-    height: 100%;
-    border-radius: 10px;
-    transition: width 1s ease;
-}
-
-.progress-fill.blue { background: linear-gradient(90deg, #0895FF, #37D5FF); }
-.progress-fill.purple { background: linear-gradient(90deg, #7C3AED, #A78BFA); }
-.progress-fill.green { background: linear-gradient(90deg, #10B981, #34D399); }
-.progress-fill.orange { background: linear-gradient(90deg, #F59E0B, #FBBF24); }
-.progress-fill.cyan { background: linear-gradient(90deg, #06B6D4, #22D3EE); }
-.progress-fill.red { background: linear-gradient(90deg, #EF4444, #F87171); }
-
-.progress-text {
-    font-size: 12px;
-    color: var(--text-secondary);
-}
-
-.module-actions {
-    text-align: center;
-}
-
-.action-btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.action-btn:hover {
-    box-shadow: 3px 3px 6px var(--shadow-dark),
-                -3px -3px 6px var(--shadow-light);
-    transform: translateY(-2px);
-}
-
-/* Bottom Grid */
-.bottom-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 25px;
-    margin-bottom: 30px;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.section-header h3 {
-    font-size: 18px;
-    color: var(--text-primary);
-}
-
-.view-all-btn {
-    background: none;
-    border: none;
-    color: var(--blue);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.view-all-btn:hover {
-    background: var(--blue-light);
-}
-
-/* Recent Activities */
-.recent-activities {
-    padding: 25px;
-}
-
-.activity-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.activity-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    padding: 15px;
-    border-radius: 12px;
-    background: var(--bg-primary);
-    box-shadow: inset 2px 2px 4px var(--shadow-dark),
-                inset -2px -2px 4px var(--shadow-light);
-    transition: all 0.3s ease;
-}
-
-.activity-item:hover {
-    transform: translateX(5px);
-}
-
-.activity-icon-wrapper {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-}
-
-.activity-icon-wrapper.blue { background: var(--blue-light); }
-.activity-icon-wrapper.purple { background: var(--purple-light); }
-.activity-icon-wrapper.green { background: var(--green-light); }
-.activity-icon-wrapper.orange { background: var(--orange-light); }
-
-.activity-content {
-    flex: 1;
-}
-
-.activity-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 3px;
-}
-
-.activity-desc {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-bottom: 5px;
-}
-
-.activity-time {
-    font-size: 11px;
-    color: var(--text-secondary);
-    opacity: 0.7;
-}
-
-/* Quick Actions */
-.quick-actions {
-    padding: 25px;
-}
-
-.actions-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-}
-
-.quick-action-btn {
-    padding: 20px;
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    color: var(--text-primary);
-    font-family: 'Poppins', sans-serif;
-}
-
-.quick-action-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 3px 3px 6px var(--shadow-dark),
-                -3px -3px 6px var(--shadow-light);
-}
-
-.action-icon {
-    font-size: 24px;
-}
-
-.action-label {
-    font-size: 12px;
-    font-weight: 500;
-    text-align: center;
-}
-
-/* Module Detail Pages */
-.module-detail-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-}
-
-.detail-card {
-    padding: 25px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.detail-card:hover {
-    transform: translateY(-5px);
-}
-
-.detail-card h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: var(--text-primary);
-}
-
-.detail-value {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--accent-blue);
-    margin-bottom: 10px;
-}
-
-.detail-card p {
-    font-size: 14px;
-    color: var(--text-secondary);
-}
-
-/* Current Date */
-.current-date {
-    font-size: 14px;
-    color: var(--text-secondary);
-    padding: 10px 15px;
-    background: var(--bg-primary);
-    border-radius: 12px;
-    box-shadow: inset 2px 2px 4px var(--shadow-dark),
-                inset -2px -2px 4px var(--shadow-light);
-}
-
-/* Responsive Design Updates */
-@media screen and (max-width: 1200px) {
-    .module-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    }
-    
-    .bottom-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .quick-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .module-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .module-metrics {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-    }
-    
-    .actions-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .quick-stats-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .module-metrics {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .metric:last-child {
-        display: none;
-    }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ndanduleni Group - ERP Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="images/logo.png" alt="Logo" class="sidebar-logo">
+            <h3>Ndanduleni ERP</h3>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active" data-page="overview">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard Overview</span>
+            </li>
+            <li class="nav-item" data-page="finance">
+                <span class="nav-icon">💰</span>
+                <span class="nav-text">Finance</span>
+            </li>
+            <li class="nav-item" data-page="hr">
+                <span class="nav-icon">👥</span>
+                <span class="nav-text">Human Resources</span>
+            </li>
+            <li class="nav-item" data-page="inventory">
+                <span class="nav-icon">📦</span>
+                <span class="nav-text">Inventory</span>
+            </li>
+            <li class="nav-item" data-page="sales">
+                <span class="nav-icon">📈</span>
+                <span class="nav-text">Sales</span>
+            </li>
+            <li class="nav-item" data-page="procurement">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-text">Procurement</span>
+            </li>
+            <li class="nav-item" data-page="crm">
+                <span class="nav-icon">🤝</span>
+                <span class="nav-text">CRM</span>
+            </li>
+            <li class="nav-item" data-page="projects">
+                <span class="nav-icon">🎯</span>
+                <span class="nav-text">Projects</span>
+            </li>
+            <li class="nav-item" data-page="assets">
+                <span class="nav-icon">🏗️</span>
+                <span class="nav-text">Assets</span>
+            </li>
+            <li class="nav-item" data-page="reports">
+                <span class="nav-icon">📋</span>
+                <span class="nav-text">Reports</span>
+            </li>
+            <li class="nav-item" data-page="settings">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Settings</span>
+            </li>
+        </ul>
+        
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <div class="user-details">
+                    <span class="user-name" id="userName">User</span>
+                    <span class="user-role" id="userRole">Employee</span>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="handleLogout()">
+                <span>🚪</span> Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+                <span class="hamburger">☰</span>
+            </button>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search modules, reports, transactions..." class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+            
+            <div class="top-bar-actions">
+                <div class="date-display" id="currentDate"></div>
+                <button class="notification-btn" title="Notifications">
+                    🔔
+                    <span class="notification-badge">5</span>
+                </button>
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+                    🌓
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content Pages -->
+        <div class="content-area">
+            <!-- Overview Page - Grid Layout -->
+            <div class="page active" id="overview-page">
+                <h1 class="page-title">Dashboard Overview</h1>
+                
+                <!-- Quick Stats Row -->
+                <div class="quick-stats">
+                    <div class="quick-stat neumorphic">
+                        <span class="qs-icon">💰</span>
+                        <div class="qs-info">
+                            <span class="qs-label">Revenue (MTD)</span>
+                            <span class="qs-value">R 2.4M</span>
+                        </div>
+                    </div>
+                    <div class="quick-stat neumorphic">
+                        <span class="qs-icon">📊</span>
+                        <div class="qs-info">
+                            <span class="qs-label">Expenses (MTD)</span>
+                            <span class="qs-value">R 1.8M</span>
+                        </div>
+                    </div>
+                    <div class="quick-stat neumorphic">
+                        <span class="qs-icon">💵</span>
+                        <div class="qs-info">
+                            <span class="qs-label">Profit (MTD)</span>
+                            <span class="qs-value">R 600K</span>
+                        </div>
+                    </div>
+                    <div class="quick-stat neumorphic">
+                        <span class="qs-icon">👥</span>
+                        <div class="qs-info">
+                            <span class="qs-label">Employees</span>
+                            <span class="qs-value">247</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module Grid -->
+                <div class="module-grid">
+                    <!-- Finance Module Card -->
+                    <div class="module-card neumorphic" data-page="finance">
+                        <div class="module-header">
+                            <div class="module-icon">💰</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">Finance</h3>
+                        <p class="module-desc">Financial management, accounting & reporting</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">R 5.8M</span>
+                                <span class="mini-label">Balance</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">156</span>
+                                <span class="mini-label">Invoices</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">23</span>
+                                <span class="mini-label">Pending</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- HR Module Card -->
+                    <div class="module-card neumorphic" data-page="hr">
+                        <div class="module-header">
+                            <div class="module-icon">👥</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">Human Resources</h3>
+                        <p class="module-desc">Employee management & payroll</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">247</span>
+                                <span class="mini-label">Employees</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">96%</span>
+                                <span class="mini-label">Attendance</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">5</span>
+                                <span class="mini-label">Openings</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- Sales Module Card -->
+                    <div class="module-card neumorphic" data-page="sales">
+                        <div class="module-header">
+                            <div class="module-icon">📈</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">Sales</h3>
+                        <p class="module-desc">Sales orders & customer management</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">89</span>
+                                <span class="mini-label">Orders</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">R 3.2M</span>
+                                <span class="mini-label">Pipeline</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">67%</span>
+                                <span class="mini-label">Conv. Rate</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- Inventory Module Card -->
+                    <div class="module-card neumorphic" data-page="inventory">
+                        <div class="module-header">
+                            <div class="module-icon">📦</div>
+                            <div class="module-status warning">Low Stock</div>
+                        </div>
+                        <h3 class="module-title">Inventory</h3>
+                        <p class="module-desc">Stock management & warehousing</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">1,423</span>
+                                <span class="mini-label">Items</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">12</span>
+                                <span class="mini-label">Low Stock</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">R 4.1M</span>
+                                <span class="mini-label">Value</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- Procurement Module Card -->
+                    <div class="module-card neumorphic" data-page="procurement">
+                        <div class="module-header">
+                            <div class="module-icon">🛒</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">Procurement</h3>
+                        <p class="module-desc">Purchase orders & vendor management</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">34</span>
+                                <span class="mini-label">POs</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">18</span>
+                                <span class="mini-label">Vendors</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">R 890K</span>
+                                <span class="mini-label">Spent</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- CRM Module Card -->
+                    <div class="module-card neumorphic" data-page="crm">
+                        <div class="module-header">
+                            <div class="module-icon">🤝</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">CRM</h3>
+                        <p class="module-desc">Customer relationship management</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">342</span>
+                                <span class="mini-label">Contacts</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">56</span>
+                                <span class="mini-label">Companies</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">28</span>
+                                <span class="mini-label">Deals</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- Projects Module Card -->
+                    <div class="module-card neumorphic" data-page="projects">
+                        <div class="module-header">
+                            <div class="module-icon">🎯</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">Projects</h3>
+                        <p class="module-desc">Project tracking & management</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">15</span>
+                                <span class="mini-label">Active</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">78%</span>
+                                <span class="mini-label">On Track</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">R 12M</span>
+                                <span class="mini-label">Budget</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- Assets Module Card -->
+                    <div class="module-card neumorphic" data-page="assets">
+                        <div class="module-header">
+                            <div class="module-icon">🏗️</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">Assets</h3>
+                        <p class="module-desc">Fixed asset management & tracking</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">423</span>
+                                <span class="mini-label">Assets</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">R 25M</span>
+                                <span class="mini-label">Value</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">95%</span>
+                                <span class="mini-label">Utilized</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- Reports Module Card -->
+                    <div class="module-card neumorphic" data-page="reports">
+                        <div class="module-header">
+                            <div class="module-icon">📋</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">Reports</h3>
+                        <p class="module-desc">Analytics & business intelligence</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">42</span>
+                                <span class="mini-label">Reports</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">8</span>
+                                <span class="mini-label">Dashboards</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">12</span>
+                                <span class="mini-label">Scheduled</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- Settings Module Card -->
+                    <div class="module-card neumorphic" data-page="settings">
+                        <div class="module-header">
+                            <div class="module-icon">⚙️</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">Settings</h3>
+                        <p class="module-desc">System configuration & user management</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">12</span>
+                                <span class="mini-label">Users</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">3</span>
+                                <span class="mini-label">Roles</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">99.9%</span>
+                                <span class="mini-label">Uptime</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+                </div>
+
+                <!-- Recent Activities -->
+                <div class="recent-activities neumorphic">
+                    <div class="activities-header">
+                        <h3>Recent Activities</h3>
+                        <button class="view-all-btn">View All</button>
+                    </div>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">💰</div>
+                            <div class="activity-details">
+                                <p class="activity-title">New invoice created</p>
+                                <p class="activity-desc">Invoice #INV-2024-089 - R 45,000</p>
+                                <span class="activity-time">2 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">👤</div>
+                            <div class="activity-details">
+                                <p class="activity-title">New employee onboarded</p>
+                                <p class="activity-desc">John Doe - Senior Developer</p>
+                                <span class="activity-time">15 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">📦</div>
+                            <div class="activity-details">
+                                <p class="activity-title">Stock replenishment completed</p>
+                                <p class="activity-desc">Warehouse A - 250 items restocked</p>
+                                <span class="activity-time">1 hour ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">✅</div>
+                            <div class="activity-details">
+                                <p class="activity-title">Purchase order approved</p>
+                                <p class="activity-desc">PO #PO-2024-156 - Office Supplies</p>
+                                <span class="activity-time">3 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">📊</div>
+                            <div class="activity-details">
+                                <p class="activity-title">Monthly report generated</p>
+                                <p class="activity-desc">January 2024 Financial Summary</p>
+                                <span class="activity-time">5 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module Detail Pages -->
+            <div class="page" id="finance-page">
+                <h1 class="page-title">💰 Finance Management</h1>
+                <p class="page-description">Detailed finance module coming soon...</p>
+            </div>
+            
+            <div class="page" id="hr-page">
+                <h1 class="page-title">👥 Human Resources</h1>
+                <p class="page-description">Detailed HR module coming soon...</p>
+            </div>
+            
+            <div class="page" id="sales-page">
+                <h1 class="page-title">📈 Sales Management</h1>
+                <p class="page-description">Detailed sales module coming soon...</p>
+            </div>
+            
+            <div class="page" id="inventory-page">
+                <h1 class="page-title">📦 Inventory Management</h1>
+                <p class="page-description">Detailed inventory module coming soon...</p>
+            </div>
+            
+            <div class="page" id="procurement-page">
+                <h1 class="page-title">🛒 Procurement</h1>
+                <p class="page-description">Detailed procurement module coming soon...</p>
+            </div>
+            
+            <div class="page" id="crm-page">
+                <h1 class="page-title">🤝 CRM</h1>
+                <p class="page-description">Detailed CRM module coming soon...</p>
+            </div>
+            
+            <div class="page" id="projects-page">
+                <h1 class="page-title">🎯 Projects</h1>
+                <p class="page-description">Detailed projects module coming soon...</p>
+            </div>
+            
+            <div class="page" id="assets-page">
+                <h1 class="page-title">🏗️ Assets Management</h1>
+                <p class="page-description">Detailed assets module coming soon...</p>
+            </div>
+            
+            <div class="page" id="reports-page">
+                <h1 class="page-title">📋 Reports & Analytics</h1>
+                <p class="page-description">Detailed reports module coming soon...</p>
+            </div>
+            
+            <div class="page" id="settings-page">
+                <h1 class="page-title">⚙️ Settings</h1>
+                <p class="page-description">Detailed settings module coming soon...</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/supabase-client.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
