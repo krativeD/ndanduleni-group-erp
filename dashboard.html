@@ -18,8 +18,8 @@
         
         <ul class="nav-menu">
             <li class="nav-item active" data-page="overview">
-                <span class="nav-icon">🏠</span>
-                <span class="nav-text">Overview</span>
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard Overview</span>
             </li>
             <li class="nav-item" data-page="finance">
                 <span class="nav-icon">💰</span>
@@ -37,9 +37,21 @@
                 <span class="nav-icon">📈</span>
                 <span class="nav-text">Sales</span>
             </li>
+            <li class="nav-item" data-page="procurement">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-text">Procurement</span>
+            </li>
+            <li class="nav-item" data-page="crm">
+                <span class="nav-icon">🤝</span>
+                <span class="nav-text">CRM</span>
+            </li>
             <li class="nav-item" data-page="projects">
                 <span class="nav-icon">🎯</span>
                 <span class="nav-text">Projects</span>
+            </li>
+            <li class="nav-item" data-page="assets">
+                <span class="nav-icon">🏗️</span>
+                <span class="nav-text">Assets</span>
             </li>
             <li class="nav-item" data-page="reports">
                 <span class="nav-icon">📋</span>
@@ -74,11 +86,12 @@
             </button>
             
             <div class="search-bar">
-                <input type="text" placeholder="Search anything..." class="search-input">
+                <input type="text" placeholder="Search modules..." class="search-input">
                 <button class="search-btn">🔍</button>
             </div>
             
             <div class="top-bar-actions">
+                <div class="date-display" id="currentDate"></div>
                 <button class="notification-btn" title="Notifications">
                     🔔
                     <span class="notification-badge">5</span>
@@ -86,516 +99,318 @@
                 <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
                     🌓
                 </button>
-                <div class="current-date" id="currentDate"></div>
             </div>
         </header>
 
-        <!-- Dashboard Content -->
+        <!-- Dashboard Content Pages -->
         <div class="content-area">
-            <!-- Overview Page - Grid Layout -->
+            <!-- Overview Page - Module Grid Only -->
             <div class="page active" id="overview-page">
-                <div class="welcome-section">
-                    <h1 class="page-title">Welcome back, <span id="welcomeName">User</span> 👋</h1>
-                    <p class="page-subtitle">Here's what's happening with your business today</p>
-                </div>
+                <h1 class="page-title">Dashboard Overview</h1>
 
-                <!-- Quick Stats Row -->
-                <div class="quick-stats-grid">
-                    <div class="quick-stat neumorphic">
-                        <div class="quick-stat-icon blue">💰</div>
-                        <div class="quick-stat-info">
-                            <h4>Total Revenue</h4>
-                            <p class="quick-stat-value">R 2.4M</p>
-                            <span class="trend positive">↑ 12.5%</span>
-                        </div>
-                    </div>
-                    
-                    <div class="quick-stat neumorphic">
-                        <div class="quick-stat-icon green">📊</div>
-                        <div class="quick-stat-info">
-                            <h4>Net Profit</h4>
-                            <p class="quick-stat-value">R 890K</p>
-                            <span class="trend positive">↑ 8.3%</span>
-                        </div>
-                    </div>
-                    
-                    <div class="quick-stat neumorphic">
-                        <div class="quick-stat-icon purple">👥</div>
-                        <div class="quick-stat-info">
-                            <h4>Total Employees</h4>
-                            <p class="quick-stat-value">247</p>
-                            <span class="trend positive">↑ 3</span>
-                        </div>
-                    </div>
-                    
-                    <div class="quick-stat neumorphic">
-                        <div class="quick-stat-icon orange">📦</div>
-                        <div class="quick-stat-info">
-                            <h4>Stock Items</h4>
-                            <p class="quick-stat-value">1,423</p>
-                            <span class="trend negative">↓ 2.1%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Module Cards Grid -->
+                <!-- Module Grid -->
                 <div class="module-grid">
                     <!-- Finance Module Card -->
-                    <div class="module-card neumorphic" onclick="navigateToModule('finance')">
-                        <div class="module-card-header">
-                            <div class="module-icon-wrapper blue">
-                                <span class="module-icon">💰</span>
-                            </div>
-                            <span class="module-status active">Active</span>
+                    <div class="module-card neumorphic" data-page="finance">
+                        <div class="module-header">
+                            <div class="module-icon">💰</div>
+                            <div class="module-status online">Active</div>
                         </div>
                         <h3 class="module-title">Finance</h3>
-                        <div class="module-metrics">
-                            <div class="metric">
-                                <span class="metric-label">Revenue</span>
-                                <span class="metric-value">R 2.4M</span>
+                        <p class="module-desc">Financial management, accounting & reporting</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">R 5.8M</span>
+                                <span class="mini-label">Balance</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Expenses</span>
-                                <span class="metric-value">R 1.5M</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">156</span>
+                                <span class="mini-label">Invoices</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Pending</span>
-                                <span class="metric-value">23</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">23</span>
+                                <span class="mini-label">Pending</span>
                             </div>
                         </div>
-                        <div class="module-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill blue" style="width: 75%"></div>
-                            </div>
-                            <span class="progress-text">75% Budget Used</span>
-                        </div>
-                        <div class="module-actions">
-                            <button class="action-btn neumorphic-inset">View Details →</button>
-                        </div>
+                        <button class="module-btn">Open Module →</button>
                     </div>
 
                     <!-- HR Module Card -->
-                    <div class="module-card neumorphic" onclick="navigateToModule('hr')">
-                        <div class="module-card-header">
-                            <div class="module-icon-wrapper purple">
-                                <span class="module-icon">👥</span>
-                            </div>
-                            <span class="module-status active">Active</span>
+                    <div class="module-card neumorphic" data-page="hr">
+                        <div class="module-header">
+                            <div class="module-icon">👥</div>
+                            <div class="module-status online">Active</div>
                         </div>
                         <h3 class="module-title">Human Resources</h3>
-                        <div class="module-metrics">
-                            <div class="metric">
-                                <span class="metric-label">Employees</span>
-                                <span class="metric-value">247</span>
+                        <p class="module-desc">Employee management & payroll</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">247</span>
+                                <span class="mini-label">Employees</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Attendance</span>
-                                <span class="metric-value">96%</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">96%</span>
+                                <span class="mini-label">Attendance</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Open Roles</span>
-                                <span class="metric-value">5</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">5</span>
+                                <span class="mini-label">Openings</span>
                             </div>
                         </div>
-                        <div class="module-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill purple" style="width: 96%"></div>
-                            </div>
-                            <span class="progress-text">96% Attendance Rate</span>
-                        </div>
-                        <div class="module-actions">
-                            <button class="action-btn neumorphic-inset">Manage Team →</button>
-                        </div>
+                        <button class="module-btn">Open Module →</button>
                     </div>
 
                     <!-- Sales Module Card -->
-                    <div class="module-card neumorphic" onclick="navigateToModule('sales')">
-                        <div class="module-card-header">
-                            <div class="module-icon-wrapper green">
-                                <span class="module-icon">📈</span>
-                            </div>
-                            <span class="module-status warning">Attention</span>
+                    <div class="module-card neumorphic" data-page="sales">
+                        <div class="module-header">
+                            <div class="module-icon">📈</div>
+                            <div class="module-status online">Active</div>
                         </div>
                         <h3 class="module-title">Sales</h3>
-                        <div class="module-metrics">
-                            <div class="metric">
-                                <span class="metric-label">Orders</span>
-                                <span class="metric-value">89</span>
+                        <p class="module-desc">Sales orders & customer management</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">89</span>
+                                <span class="mini-label">Orders</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Revenue</span>
-                                <span class="metric-value">R 1.2M</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">R 3.2M</span>
+                                <span class="mini-label">Pipeline</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Target</span>
-                                <span class="metric-value">68%</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">67%</span>
+                                <span class="mini-label">Conv. Rate</span>
                             </div>
                         </div>
-                        <div class="module-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill green" style="width: 68%"></div>
-                            </div>
-                            <span class="progress-text">68% of Monthly Target</span>
-                        </div>
-                        <div class="module-actions">
-                            <button class="action-btn neumorphic-inset">View Pipeline →</button>
-                        </div>
+                        <button class="module-btn">Open Module →</button>
                     </div>
 
                     <!-- Inventory Module Card -->
-                    <div class="module-card neumorphic" onclick="navigateToModule('inventory')">
-                        <div class="module-card-header">
-                            <div class="module-icon-wrapper orange">
-                                <span class="module-icon">📦</span>
-                            </div>
-                            <span class="module-status active">Active</span>
+                    <div class="module-card neumorphic" data-page="inventory">
+                        <div class="module-header">
+                            <div class="module-icon">📦</div>
+                            <div class="module-status warning">Low Stock</div>
                         </div>
                         <h3 class="module-title">Inventory</h3>
-                        <div class="module-metrics">
-                            <div class="metric">
-                                <span class="metric-label">Items</span>
-                                <span class="metric-value">1,423</span>
+                        <p class="module-desc">Stock management & warehousing</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">1,423</span>
+                                <span class="mini-label">Items</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Low Stock</span>
-                                <span class="metric-value">12</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">12</span>
+                                <span class="mini-label">Low Stock</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Value</span>
-                                <span class="metric-value">R 5.8M</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">R 4.1M</span>
+                                <span class="mini-label">Value</span>
                             </div>
                         </div>
-                        <div class="module-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill orange" style="width: 92%"></div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- Procurement Module Card -->
+                    <div class="module-card neumorphic" data-page="procurement">
+                        <div class="module-header">
+                            <div class="module-icon">🛒</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">Procurement</h3>
+                        <p class="module-desc">Purchase orders & vendor management</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">34</span>
+                                <span class="mini-label">POs</span>
                             </div>
-                            <span class="progress-text">92% Stock Capacity</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">18</span>
+                                <span class="mini-label">Vendors</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">R 890K</span>
+                                <span class="mini-label">Spent</span>
+                            </div>
                         </div>
-                        <div class="module-actions">
-                            <button class="action-btn neumorphic-inset">Check Stock →</button>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- CRM Module Card -->
+                    <div class="module-card neumorphic" data-page="crm">
+                        <div class="module-header">
+                            <div class="module-icon">🤝</div>
+                            <div class="module-status online">Active</div>
                         </div>
+                        <h3 class="module-title">CRM</h3>
+                        <p class="module-desc">Customer relationship management</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">342</span>
+                                <span class="mini-label">Contacts</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">56</span>
+                                <span class="mini-label">Companies</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">28</span>
+                                <span class="mini-label">Deals</span>
+                            </div>
+                        </div>
+                        <button class="module-btn">Open Module →</button>
                     </div>
 
                     <!-- Projects Module Card -->
-                    <div class="module-card neumorphic" onclick="navigateToModule('projects')">
-                        <div class="module-card-header">
-                            <div class="module-icon-wrapper cyan">
-                                <span class="module-icon">🎯</span>
-                            </div>
-                            <span class="module-status active">Active</span>
+                    <div class="module-card neumorphic" data-page="projects">
+                        <div class="module-header">
+                            <div class="module-icon">🎯</div>
+                            <div class="module-status online">Active</div>
                         </div>
                         <h3 class="module-title">Projects</h3>
-                        <div class="module-metrics">
-                            <div class="metric">
-                                <span class="metric-label">Active</span>
-                                <span class="metric-value">15</span>
+                        <p class="module-desc">Project tracking & management</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">15</span>
+                                <span class="mini-label">Active</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Completed</span>
-                                <span class="metric-value">89</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">78%</span>
+                                <span class="mini-label">On Track</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">On Hold</span>
-                                <span class="metric-value">3</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">R 12M</span>
+                                <span class="mini-label">Budget</span>
                             </div>
                         </div>
-                        <div class="module-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill cyan" style="width: 85%"></div>
+                        <button class="module-btn">Open Module →</button>
+                    </div>
+
+                    <!-- Assets Module Card -->
+                    <div class="module-card neumorphic" data-page="assets">
+                        <div class="module-header">
+                            <div class="module-icon">🏗️</div>
+                            <div class="module-status online">Active</div>
+                        </div>
+                        <h3 class="module-title">Assets</h3>
+                        <p class="module-desc">Fixed asset management & tracking</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">423</span>
+                                <span class="mini-label">Assets</span>
                             </div>
-                            <span class="progress-text">85% On Schedule</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">R 25M</span>
+                                <span class="mini-label">Value</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">95%</span>
+                                <span class="mini-label">Utilized</span>
+                            </div>
                         </div>
-                        <div class="module-actions">
-                            <button class="action-btn neumorphic-inset">View Projects →</button>
-                        </div>
+                        <button class="module-btn">Open Module →</button>
                     </div>
 
                     <!-- Reports Module Card -->
-                    <div class="module-card neumorphic" onclick="navigateToModule('reports')">
-                        <div class="module-card-header">
-                            <div class="module-icon-wrapper red">
-                                <span class="module-icon">📋</span>
-                            </div>
-                            <span class="module-status active">Active</span>
+                    <div class="module-card neumorphic" data-page="reports">
+                        <div class="module-header">
+                            <div class="module-icon">📋</div>
+                            <div class="module-status online">Active</div>
                         </div>
                         <h3 class="module-title">Reports</h3>
-                        <div class="module-metrics">
-                            <div class="metric">
-                                <span class="metric-label">Generated</span>
-                                <span class="metric-value">156</span>
+                        <p class="module-desc">Analytics & business intelligence</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">42</span>
+                                <span class="mini-label">Reports</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Pending</span>
-                                <span class="metric-value">8</span>
+                            <div class="mini-stat">
+                                <span class="mini-value">8</span>
+                                <span class="mini-label">Dashboards</span>
                             </div>
-                            <div class="metric">
-                                <span class="metric-label">Scheduled</span>
-                                <span class="metric-value">12</span>
-                            </div>
-                        </div>
-                        <div class="module-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill red" style="width: 95%"></div>
-                            </div>
-                            <span class="progress-text">95% Reports Complete</span>
-                        </div>
-                        <div class="module-actions">
-                            <button class="action-btn neumorphic-inset">Generate Report →</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bottom Grid: Activities & Quick Actions -->
-                <div class="bottom-grid">
-                    <!-- Recent Activities -->
-                    <div class="recent-activities neumorphic">
-                        <div class="section-header">
-                            <h3>Recent Activities</h3>
-                            <button class="view-all-btn">View All</button>
-                        </div>
-                        <div class="activity-list">
-                            <div class="activity-item">
-                                <div class="activity-icon-wrapper blue">
-                                    <span>💰</span>
-                                </div>
-                                <div class="activity-content">
-                                    <p class="activity-title">New Invoice Created</p>
-                                    <p class="activity-desc">Invoice #INV-2024-089 - R 45,000</p>
-                                    <span class="activity-time">2 minutes ago</span>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-icon-wrapper purple">
-                                    <span>👤</span>
-                                </div>
-                                <div class="activity-content">
-                                    <p class="activity-title">New Employee Onboarded</p>
-                                    <p class="activity-desc">John Doe - Senior Developer</p>
-                                    <span class="activity-time">15 minutes ago</span>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-icon-wrapper orange">
-                                    <span>📦</span>
-                                </div>
-                                <div class="activity-content">
-                                    <p class="activity-title">Stock Replenishment</p>
-                                    <p class="activity-desc">Warehouse A - 250 units added</p>
-                                    <span class="activity-time">1 hour ago</span>
-                                </div>
-                            </div>
-                            <div class="activity-item">
-                                <div class="activity-icon-wrapper green">
-                                    <span>✅</span>
-                                </div>
-                                <div class="activity-content">
-                                    <p class="activity-title">PO Approved</p>
-                                    <p class="activity-desc">Purchase Order #PO-2024-156</p>
-                                    <span class="activity-time">3 hours ago</span>
-                                </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">12</span>
+                                <span class="mini-label">Scheduled</span>
                             </div>
                         </div>
+                        <button class="module-btn">Open Module →</button>
                     </div>
 
-                    <!-- Quick Actions -->
-                    <div class="quick-actions neumorphic">
-                        <div class="section-header">
-                            <h3>Quick Actions</h3>
+                    <!-- Settings Module Card -->
+                    <div class="module-card neumorphic" data-page="settings">
+                        <div class="module-header">
+                            <div class="module-icon">⚙️</div>
+                            <div class="module-status online">Active</div>
                         </div>
-                        <div class="actions-grid">
-                            <button class="quick-action-btn neumorphic-inset">
-                                <span class="action-icon">➕</span>
-                                <span class="action-label">New Invoice</span>
-                            </button>
-                            <button class="quick-action-btn neumorphic-inset">
-                                <span class="action-icon">👤</span>
-                                <span class="action-label">Add Employee</span>
-                            </button>
-                            <button class="quick-action-btn neumorphic-inset">
-                                <span class="action-icon">📦</span>
-                                <span class="action-label">Add Product</span>
-                            </button>
-                            <button class="quick-action-btn neumorphic-inset">
-                                <span class="action-icon">📊</span>
-                                <span class="action-label">New Report</span>
-                            </button>
-                            <button class="quick-action-btn neumorphic-inset">
-                                <span class="action-icon">💵</span>
-                                <span class="action-label">Record Payment</span>
-                            </button>
-                            <button class="quick-action-btn neumorphic-inset">
-                                <span class="action-icon">📅</span>
-                                <span class="action-label">Schedule Meeting</span>
-                            </button>
+                        <h3 class="module-title">Settings</h3>
+                        <p class="module-desc">System configuration & user management</p>
+                        <div class="module-stats">
+                            <div class="mini-stat">
+                                <span class="mini-value">12</span>
+                                <span class="mini-label">Users</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">3</span>
+                                <span class="mini-label">Roles</span>
+                            </div>
+                            <div class="mini-stat">
+                                <span class="mini-value">99.9%</span>
+                                <span class="mini-label">Uptime</span>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Pagination for modules -->
-                <div class="pagination-section">
-                    <div class="pagination neumorphic">
-                        <button id="previous">Prev.</button>
-                        <ul>
-                            <li class="active">1</li>
-                            <li>2</li>
-                            <li>3</li>
-                            <li>4</li>
-                            <li>5</li>
-                        </ul>
-                        <button id="next">Next</button>
+                        <button class="module-btn">Open Module →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Finance Page -->
+            <!-- Module Detail Pages -->
             <div class="page" id="finance-page">
-                <h1 class="page-title">Finance Management</h1>
-                <div class="module-detail-grid">
-                    <div class="detail-card neumorphic">
-                        <h3>💰 Revenue Overview</h3>
-                        <p class="detail-value">R 2.4M</p>
-                        <p>Monthly revenue with 12.5% growth</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>💳 Expenses</h3>
-                        <p class="detail-value">R 1.5M</p>
-                        <p>Track and manage all expenses</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>📊 Budget</h3>
-                        <p class="detail-value">75% Used</p>
-                        <p>Annual budget utilization</p>
-                    </div>
-                </div>
+                <h1 class="page-title">💰 Finance Management</h1>
+                <p class="page-description">Detailed finance module coming soon...</p>
             </div>
-
-            <!-- HR Page -->
+            
             <div class="page" id="hr-page">
-                <h1 class="page-title">Human Resources</h1>
-                <div class="module-detail-grid">
-                    <div class="detail-card neumorphic">
-                        <h3>👥 Total Employees</h3>
-                        <p class="detail-value">247</p>
-                        <p>Across 8 departments</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>📅 Attendance</h3>
-                        <p class="detail-value">96%</p>
-                        <p>Current attendance rate</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>🎯 Open Positions</h3>
-                        <p class="detail-value">5</p>
-                        <p>Currently hiring</p>
-                    </div>
-                </div>
+                <h1 class="page-title">👥 Human Resources</h1>
+                <p class="page-description">Detailed HR module coming soon...</p>
             </div>
-
-            <!-- Inventory Page -->
-            <div class="page" id="inventory-page">
-                <h1 class="page-title">Inventory Management</h1>
-                <div class="module-detail-grid">
-                    <div class="detail-card neumorphic">
-                        <h3>📦 Total Items</h3>
-                        <p class="detail-value">1,423</p>
-                        <p>Across all warehouses</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>⚠️ Low Stock</h3>
-                        <p class="detail-value">12</p>
-                        <p>Items below threshold</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>💎 Total Value</h3>
-                        <p class="detail-value">R 5.8M</p>
-                        <p>Current inventory value</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sales Page -->
+            
             <div class="page" id="sales-page">
-                <h1 class="page-title">Sales Management</h1>
-                <div class="module-detail-grid">
-                    <div class="detail-card neumorphic">
-                        <h3>📈 Total Orders</h3>
-                        <p class="detail-value">89</p>
-                        <p>Active sales orders</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>🎯 Target</h3>
-                        <p class="detail-value">68%</p>
-                        <p>Monthly target achieved</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>💵 Revenue</h3>
-                        <p class="detail-value">R 1.2M</p>
-                        <p>Sales revenue this month</p>
-                    </div>
-                </div>
+                <h1 class="page-title">📈 Sales Management</h1>
+                <p class="page-description">Detailed sales module coming soon...</p>
             </div>
-
-            <!-- Projects Page -->
+            
+            <div class="page" id="inventory-page">
+                <h1 class="page-title">📦 Inventory Management</h1>
+                <p class="page-description">Detailed inventory module coming soon...</p>
+            </div>
+            
+            <div class="page" id="procurement-page">
+                <h1 class="page-title">🛒 Procurement</h1>
+                <p class="page-description">Detailed procurement module coming soon...</p>
+            </div>
+            
+            <div class="page" id="crm-page">
+                <h1 class="page-title">🤝 CRM</h1>
+                <p class="page-description">Detailed CRM module coming soon...</p>
+            </div>
+            
             <div class="page" id="projects-page">
-                <h1 class="page-title">Project Management</h1>
-                <div class="module-detail-grid">
-                    <div class="detail-card neumorphic">
-                        <h3>🚀 Active Projects</h3>
-                        <p class="detail-value">15</p>
-                        <p>Currently in progress</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>✅ Completed</h3>
-                        <p class="detail-value">89</p>
-                        <p>Successfully delivered</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>⏸️ On Hold</h3>
-                        <p class="detail-value">3</p>
-                        <p>Pending resources</p>
-                    </div>
-                </div>
+                <h1 class="page-title">🎯 Projects</h1>
+                <p class="page-description">Detailed projects module coming soon...</p>
             </div>
-
-            <!-- Reports Page -->
+            
+            <div class="page" id="assets-page">
+                <h1 class="page-title">🏗️ Assets Management</h1>
+                <p class="page-description">Detailed assets module coming soon...</p>
+            </div>
+            
             <div class="page" id="reports-page">
-                <h1 class="page-title">Reports & Analytics</h1>
-                <div class="module-detail-grid">
-                    <div class="detail-card neumorphic">
-                        <h3>📋 Generated</h3>
-                        <p class="detail-value">156</p>
-                        <p>Reports this month</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>⏳ Pending</h3>
-                        <p class="detail-value">8</p>
-                        <p>Awaiting generation</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>📅 Scheduled</h3>
-                        <p class="detail-value">12</p>
-                        <p>Automated reports</p>
-                    </div>
-                </div>
+                <h1 class="page-title">📋 Reports & Analytics</h1>
+                <p class="page-description">Detailed reports module coming soon...</p>
             </div>
-
-            <!-- Settings Page -->
+            
             <div class="page" id="settings-page">
-                <h1 class="page-title">Settings</h1>
-                <div class="module-detail-grid">
-                    <div class="detail-card neumorphic">
-                        <h3>👤 Profile</h3>
-                        <p>Manage your account settings</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>🔒 Security</h3>
-                        <p>Password and authentication</p>
-                    </div>
-                    <div class="detail-card neumorphic">
-                        <h3>🔔 Notifications</h3>
-                        <p>Alert preferences</p>
-                    </div>
-                </div>
+                <h1 class="page-title">⚙️ Settings</h1>
+                <p class="page-description">Detailed settings module coming soon...</p>
             </div>
         </div>
     </main>
