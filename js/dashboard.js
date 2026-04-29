@@ -3,7 +3,6 @@ async function checkAuth() {
     const { data: { session }, error } = await supabaseClient.auth.getSession();
     
     if (error || !session) {
-        // Redirect to login if not authenticated
         window.location.href = 'index.html';
         return null;
     }
@@ -32,14 +31,31 @@ async function loadUserData() {
     }
     
     // Fetch profile from database
-    const { data: profile } = await supabaseClient
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-    
-    if (profile && userRole) {
-        userRole.textContent = profile.role || 'Employee';
+    try {
+        const { data: profile } = await supabaseClient
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single();
+        
+        if (profile && userRole) {
+            userRole.textContent = profile.role || 'Employee';
+        }
+    } catch (error) {
+        console.log('Profile fetch error (expected if table not created):', error.message);
+        if (userRole) {
+            userRole.textContent = 'User';
+        }
+    }
+}
+
+// Update current date
+function updateDate() {
+    const dateElement = document.getElementById('currentDate');
+    if (dateElement) {
+        const now = new Date();
+        const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+        dateElement.textContent = now.toLocaleDateString('en-US', options);
     }
 }
 
@@ -47,28 +63,62 @@ async function loadUserData() {
 function initializeNavigation() {
     const navItems = document.querySelectorAll('.nav-item');
     const pages = document.querySelectorAll('.page');
+    const moduleCards = document.querySelectorAll('.module-card');
     
+    // Sidebar navigation
     navItems.forEach(item => {
         item.addEventListener('click', () => {
             const pageName = item.dataset.page;
-            
-            // Update active nav item
-            navItems.forEach(nav => nav.classList.remove('active'));
-            item.classList.add('active');
-            
-            // Show corresponding page
-            pages.forEach(page => page.classList.remove('active'));
-            const targetPage = document.getElementById(`${pageName}-page`);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-            
-            // Close sidebar on mobile
-            if (window.innerWidth <= 1024) {
-                toggleSidebar(false);
-            }
+            navigateToPage(pageName, item, navItems, pages);
         });
     });
+    
+    // Module card clicks
+    moduleCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Don't trigger if button was clicked
+            if (e.target.classList.contains('module-btn')) {
+                return;
+            }
+            const pageName = card.dataset.page;
+            const targetNav = document.querySelector(`.nav-item[data-page="${pageName}"]`);
+            navigateToPage(pageName, targetNav, navItems, pages);
+        });
+        
+        // Module button clicks
+        const btn = card.querySelector('.module-btn');
+        if (btn) {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const pageName = card.dataset.page;
+                const targetNav = document.querySelector(`.nav-item[data-page="${pageName}"]`);
+                navigateToPage(pageName, targetNav, navItems, pages);
+            });
+        }
+    });
+}
+
+function navigateToPage(pageName, navItem, allNavItems, allPages) {
+    // Update active nav item
+    allNavItems.forEach(nav => nav.classList.remove('active'));
+    if (navItem) {
+        navItem.classList.add('active');
+    }
+    
+    // Show corresponding page
+    allPages.forEach(page => page.classList.remove('active'));
+    const targetPage = document.getElementById(`${pageName}-page`);
+    if (targetPage) {
+        targetPage.classList.add('active');
+    }
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Close sidebar on mobile
+    if (window.innerWidth <= 1024) {
+        toggleSidebar(false);
+    }
 }
 
 // Sidebar Toggle
@@ -107,86 +157,21 @@ function loadTheme() {
     }
 }
 
-// Pagination System
-function initializePagination() {
-    // Main pagination
-    setupPagination('.pagination-section .pagination');
-    
-    // Table pagination
-    setupPagination('.table-pagination .pagination');
-}
-
-function setupPagination(selector) {
-    const pagination = document.querySelector(selector);
-    if (!pagination) return;
-    
-    const buttons = pagination.querySelectorAll('ul li');
-    const previous = pagination.querySelector('button:first-child');
-    const next = pagination.querySelector('button:last-child');
-    
-    let currentIndex = 0;
-    
-    // Initial state
-    updateButtonState();
-    
-    // Number buttons
-    buttons.forEach((btn, i) => {
-        btn.addEventListener('click', () => {
-            currentIndex = i;
-            updateActiveClass();
-            updateButtonState();
-            handlePageChange(currentIndex + 1);
-        });
-    });
-    
-    // Previous button
-    previous.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateActiveClass();
-            updateButtonState();
-            handlePageChange(currentIndex + 1);
-        }
-    });
-    
-    // Next button
-    next.addEventListener('click', () => {
-        if (currentIndex < buttons.length - 1) {
-            currentIndex++;
-            updateActiveClass();
-            updateButtonState();
-            handlePageChange(currentIndex + 1);
-        }
-    });
-    
-    function updateActiveClass() {
-        buttons.forEach(btn => btn.classList.remove('active'));
-        buttons[currentIndex].classList.add('active');
-    }
-    
-    function updateButtonState() {
-        previous.disabled = currentIndex === 0;
-        next.disabled = currentIndex === buttons.length - 1;
-    }
-}
-
-function handlePageChange(pageNumber) {
-    console.log(`Navigating to page ${pageNumber}`);
-    // Here you would typically fetch data for the new page
-    // For now, we'll just log it
-}
-
-// Button animation
+// Button animations
 function initializeButtonAnimations() {
-    const buttons = document.querySelectorAll('button:not(.menu-toggle):not(.notification-btn):not(.theme-toggle)');
+    const buttons = document.querySelectorAll('.module-btn, .view-all-btn');
     
     buttons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            // Add pressed effect
+        btn.addEventListener('mousedown', function() {
             btn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                btn.style.transform = '';
-            }, 200);
+        });
+        
+        btn.addEventListener('mouseup', function() {
+            btn.style.transform = '';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            btn.style.transform = '';
         });
     });
 }
@@ -197,29 +182,75 @@ function initializeSearch() {
     const searchBtn = document.querySelector('.search-btn');
     
     function performSearch() {
-        const query = searchInput.value.trim();
-        if (query) {
-            console.log(`Searching for: ${query}`);
-            // Implement actual search functionality here
-            alert(`Searching for: ${query}`);
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) return;
+        
+        // Search through module cards
+        const moduleCards = document.querySelectorAll('.module-card');
+        let found = false;
+        
+        moduleCards.forEach(card => {
+            const title = card.querySelector('.module-title')?.textContent.toLowerCase() || '';
+            const desc = card.querySelector('.module-desc')?.textContent.toLowerCase() || '';
+            
+            if (title.includes(query) || desc.includes(query)) {
+                card.style.boxShadow = '0 0 20px var(--accent-blue)';
+                card.style.transform = 'scale(1.02)';
+                found = true;
+                
+                setTimeout(() => {
+                    card.style.boxShadow = '';
+                    card.style.transform = '';
+                }, 2000);
+            }
+        });
+        
+        if (found) {
+            // Navigate to overview if not already there
+            const overviewNav = document.querySelector('.nav-item[data-page="overview"]');
+            const allNavItems = document.querySelectorAll('.nav-item');
+            const allPages = document.querySelectorAll('.page');
+            navigateToPage('overview', overviewNav, allNavItems, allPages);
+        } else {
+            alert(`No modules found for "${query}"`);
         }
     }
     
-    searchBtn.addEventListener('click', performSearch);
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            performSearch();
-        }
-    });
+    if (searchBtn) {
+        searchBtn.addEventListener('click', performSearch);
+    }
+    
+    if (searchInput) {
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
 }
 
 // Notification system
 function initializeNotifications() {
     const notificationBtn = document.querySelector('.notification-btn');
     
-    notificationBtn.addEventListener('click', () => {
-        alert('Notifications feature coming soon!');
-    });
+    if (notificationBtn) {
+        notificationBtn.addEventListener('click', () => {
+            // Here you would typically show a notification panel
+            // For now, we'll show a simple alert
+            alert('Notifications feature coming soon!\n\nYou have 5 unread notifications');
+        });
+    }
+}
+
+// View All Activities
+function initializeViewAll() {
+    const viewAllBtn = document.querySelector('.view-all-btn');
+    
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', () => {
+            alert('Full activity log coming soon!');
+        });
+    }
 }
 
 // Logout function
@@ -229,6 +260,7 @@ async function handleLogout() {
         window.location.href = 'index.html';
     } else {
         console.error('Logout error:', error);
+        alert('Failed to logout. Please try again.');
     }
 }
 
@@ -244,12 +276,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Load theme
     loadTheme();
     
+    // Update date
+    updateDate();
+    
     // Initialize all systems
     initializeNavigation();
-    initializePagination();
     initializeButtonAnimations();
     initializeSearch();
     initializeNotifications();
+    initializeViewAll();
     
     // Close sidebar on outside click (mobile)
     document.addEventListener('click', (e) => {
@@ -257,8 +292,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         const menuToggle = document.querySelector('.menu-toggle');
         
         if (window.innerWidth <= 1024 && 
-            !sidebar.contains(e.target) && 
-            !menuToggle.contains(e.target) &&
+            sidebar && !sidebar.contains(e.target) && 
+            menuToggle && !menuToggle.contains(e.target) &&
             sidebar.classList.contains('open')) {
             sidebar.classList.remove('open');
         }
@@ -267,7 +302,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Handle window resize
     window.addEventListener('resize', () => {
         if (window.innerWidth > 1024) {
-            document.getElementById('sidebar').classList.remove('open');
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar) {
+                sidebar.classList.remove('open');
+            }
         }
     });
 });
